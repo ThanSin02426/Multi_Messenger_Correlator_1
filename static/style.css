@@ -1,0 +1,261 @@
+:root {
+    --bg-space: #01020d;
+    --panel-bg: rgba(16, 22, 42, 0.6);
+    --glass-border: rgba(68, 119, 255, 0.4);
+    --glow-color: #00e1ff;
+    --accent-color: #ff2a6d;
+    --accent-hover: #ff5c8a;
+    --text-primary: #e0e6f0;
+    --text-secondary: #8a99b5;
+    --font-main: 'Exo 2', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-space);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Animated Starfield Background --- */
+@keyframes move-stars {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-2000px); }
+}
+
+#starfield {
+    position: fixed;
+    width: 100%;
+    height: 300%; /* Make it taller to animate vertically */
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: transparent;
+    animation: move-stars 150s linear infinite;
+    --star-color: var(--text-primary);
+    --star-count: 200;
+}
+/* This uses box-shadow to create multiple stars in one div, which is very performant */
+#starfield::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: 
+        /* This is a SASS-like loop in concept, you'd add more for more stars */
+        73vw 18vh 0px 0px var(--star-color), 92vw 41vh 1px 1px var(--star-color),
+        2vw 34vh 1px 0px var(--star-color), 13vw 96vh 1px 0px var(--star-color),
+        55vw 52vh 1px 1px var(--star-color), 6vw 74vh 0px 1px var(--star-color),
+        34vw 6vh 0px 1px var(--star-color), 99vw 22vh 0px 1px var(--star-color),
+        /* Add many more lines like this for a dense starfield */
+        15vw 150vh 0px 0px var(--star-color), 80vw 120vh 1px 1px var(--star-color),
+        25vw 180vh 1px 0px var(--star-color), 5vw 190vh 1px 0px var(--star-color);
+    /* In a real project, you'd generate a huge list of these with a script */
+}
+
+/* --- Main Layout & Header --- */
+.container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.main-header h1 {
+    font-family: var(--font-main);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color), 0 0 20px rgba(255, 42, 109, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.main-header p {
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+/* --- Glass Panels --- */
+.interface-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+}
+
+.glass-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    animation: slide-in-fwd-center 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.panel-title {
+    font-family: var(--font-mono);
+    color: var(--glow-color);
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px var(--glow-color);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.75rem;
+    letter-spacing: 2px;
+}
+
+/* --- Form Controls --- */
+.form-group { margin-bottom: 1.2rem; }
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: #01020d;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--glass-border);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--glow-color);
+    box-shadow: 0 0 15px rgba(0, 225, 255, 0.3);
+}
+
+/* --- Sci-Fi Button --- */
+.sci-fi-button {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: 1px solid var(--accent-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px white;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.sci-fi-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 0 20px var(--accent-hover);
+}
+
+.sci-fi-button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+.sci-fi-button:disabled .button-text { animation: none; }
+
+/* --- Results Panel --- */
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--text-secondary);
+    text-align: center;
+    font-family: var(--font-mono);
+}
+.placeholder .subtext { font-size: 0.9rem; max-width: 80%; }
+
+.status-message {
+    font-family: var(--font-mono);
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+}
+.error-message { color: var(--accent-color); }
+
+.result-section, .correlation-card {
+    opacity: 0;
+    animation: fade-in 0.8s ease-out forwards;
+}
+
+.result-section { margin-bottom: 2rem; }
+.result-section h2 { animation-delay: 0.2s; }
+.result-section img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+    animation-delay: 0.4s;
+    border: 1px solid var(--glass-border);
+}
+
+/* Scanlines effect for images */
+.result-section img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 1px, transparent 1px, transparent 3px);
+    pointer-events: none;
+    animation: scanlines 10s linear infinite;
+}
+@keyframes scanlines { from { background-position: 0 0; } to { background-position: 0 100px; } }
+
+.correlation-card {
+    background-color: rgba(1, 2, 13, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    animation-delay: var(--animation-delay, 0.5s);
+}
+.correlation-card p { font-family: var(--font-mono); }
+.correlation-card b { color: var(--glow-color); }
+
+
+/* --- Animations --- */
+@keyframes text-focus-in {
+    0% { filter: blur(12px); opacity: 0; }
+    100% { filter: blur(0px); opacity: 1; }
+}
+@keyframes slide-in-fwd-center {
+    0% { transform: translateZ(-1400px); opacity: 0; }
+    100% { transform: translateZ(0); opacity: 1; }
+}
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

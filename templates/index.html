@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMA Correlator Interface</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="starfield"></div>
+
+    <div class="container">
+        <header class="main-header">
+            <h1><span class="glitch" data-text="MMA CORRELATOR">MMA CORRELATOR</span></h1>
+            <p>Astrophysical Event Analysis Interface // v2.3</p>
+        </header>
+
+        <main class="interface-grid">
+            <section class="glass-panel controls-panel">
+                <h2 class="panel-title">SYSTEM CONFIGURATION</h2>
+                <form id="run-form">
+                    <div class="form-group">
+                        <label for="noise-events">Noise Event Density:</label>
+                        <input type="number" id="noise-events" value="500" min="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="true-pairs">Inject True Signals:</label>
+                        <input type="number" id="true-pairs" value="3" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="time-window">Temporal Window (days):</label>
+                        <input type="number" id="time-window" value="1.0" step="0.1" min="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="angle-sep">Angular Proximity (°):</label>
+                        <input type="number" id="angle-sep" value="1.0" step="0.1" min="0.1">
+                    </div>
+                    <button type="submit" id="run-button" class="sci-fi-button">
+                        <span class="button-text">INITIATE SCAN</span>
+                    </button>
+                </form>
+            </section>
+
+            <section class="glass-panel results-panel" id="results-container">
+                <div class="placeholder">
+                    <p>// Awaiting command...</p>
+                    <p class="subtext">System idle. Configure parameters and initiate scan to populate data stream.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

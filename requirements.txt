@@ -1,0 +1,7 @@
+numpy
+pandas
+astropy
+healpy
+matplotlib
+scipy
+Flask
