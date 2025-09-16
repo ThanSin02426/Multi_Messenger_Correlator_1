@@ -72,7 +72,7 @@ def plot_correlation_heatmap(event1, event2, pair_info, filename):
     ax.text(0.97, 0.97, text_str, transform=ax.transAxes, fontsize=10,
             verticalalignment='top', horizontalalignment='right', bbox=props)
             
-    plt.savefig(filename, dpi=150, bbox_inches='tight')
+    plt.savefig(filename, dpi=96, bbox_inches='tight')
     plt.close(fig)
 
     return filename
