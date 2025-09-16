@@ -48,5 +48,5 @@ def plot_on_healpix(events_df: pd.DataFrame, correlated_pairs: List[Dict], filen
         )
         
     plt.legend(loc='upper right', bbox_to_anchor=(1.1, 0.9))
-    plt.savefig(filename, dpi=150, bbox_inches='tight') 
+    plt.savefig(filename, dpi=96, bbox_inches='tight') 
     plt.close(fig)
